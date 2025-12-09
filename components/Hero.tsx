@@ -22,11 +22,11 @@ const Hero: React.FC = () => {
   const xSpring = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const ySpring = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
-  // Parallax transforms
-  const xBackground = useTransform(xSpring, [-0.5, 0.5], [-20, 20]);
-  const yBackground = useTransform(ySpring, [-0.5, 0.5], [-20, 20]);
-  const xContent = useTransform(xSpring, [-0.5, 0.5], [-10, 10]);
-  const yContent = useTransform(ySpring, [-0.5, 0.5], [-10, 10]);
+  // Parallax transforms - Reduced range for a less dramatic (smaller) feel
+  const xBackground = useTransform(xSpring, [-0.5, 0.5], [-15, 15]); // Was -20, 20
+  const yBackground = useTransform(ySpring, [-0.5, 0.5], [-15, 15]); // Was -20, 20
+  const xContent = useTransform(xSpring, [-0.5, 0.5], [-7, 7]); // Was -10, 10
+  const yContent = useTransform(ySpring, [-0.5, 0.5], [-7, 7]); // Was -10, 10
   
   // Scroll effects
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -35,8 +35,8 @@ const Hero: React.FC = () => {
   return (
     <div 
       ref={ref} 
-     
-      className="relative min-h-screen flex items-start pt-28 md:pt-32 overflow-hidden"
+      // Adjusted min-h-screen for better mobile view (full viewport height)
+      className="relative min-h-[calc(100vh-60px)] md:min-h-screen flex items-start pt-28 md:pt-32 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
         {/* Background Grid & Ambience with Parallax */}
@@ -45,15 +45,17 @@ const Hero: React.FC = () => {
             className="absolute inset-0 z-0 opacity-20 pointer-events-none"
         >
              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-             <div className="absolute right-0 top-0 -z-10 h-[600px] w-[600px] rounded-full bg-indigo-500/20 blur-[120px]"></div>
-             <div className="absolute left-0 bottom-0 -z-10 h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-[100px]"></div>
+             {/* Reduced blur size for tighter feel */}
+             <div className="absolute right-0 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-indigo-500/20 blur-[100px]"></div> {/* Was 600px, 120px blur */}
+             <div className="absolute left-0 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-purple-500/10 blur-[80px]"></div> {/* Was 500px, 100px blur */}
         </motion.div>
 
-        <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-            {/* Left Column: Text Content */}
+        {/* Reduced max-w-7xl to max-w-6xl for tighter desktop view */}
+        <div className="max-w-6xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+            {/* Left Column: Text Content - Order changed for mobile-first stacking */}
             <motion.div 
                 style={{ opacity, y, x: xContent }}
-                className="text-left order-1"
+                className="text-left order-2 md:order-1" // Stack image first on mobile
             >
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
@@ -67,20 +69,21 @@ const Hero: React.FC = () => {
                         </span>
                     </div>
                     
-                    {/* Name Size Reduced: elegant and balanced */}
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-7 tracking-tight leading-tight">
+                    {/* Reduced font size from 7xl to 6xl for the headline on large screens */}
+                    <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-6 md:mb-7 tracking-tight leading-tight">
                         <span className="block text-white">Aziz</span>
                         <span className="block text-secondary/60">Mughal.</span>
                     </h1>
                     
-                    <p className="text-lg text-secondary mb-8 leading-relaxed max-w-xl">
+                    {/* Adjusted text size for responsiveness */}
+                    <p className="text-base md:text-lg text-secondary mb-8 leading-relaxed max-w-xl">
                         Driving digital transformation and engineering excellence as the founder of Desk Work Solution. Building the future, one line of code at a time.
                     </p>
 
                     <div className="flex flex-wrap gap-4">
                         <button 
                             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors shadow-lg hover:shadow-white/20"
+                            className="px-6 py-3 md:px-8 md:py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors shadow-lg hover:shadow-white/20 text-sm md:text-base"
                         >
                             About Me
                         </button>
@@ -88,13 +91,14 @@ const Hero: React.FC = () => {
                             href="https://deskworksol.com/" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="px-8 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors flex items-center gap-2 backdrop-blur-sm"
+                            className="px-6 py-3 md:px-8 md:py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors flex items-center gap-2 backdrop-blur-sm text-sm md:text-base"
                         >
                             Visit DWS <ExternalLink size={18} />
                         </a>
                     </div>
 
-                    <div className="flex gap-6 mt-12 opacity-60">
+                    {/* Social links added to the bottom of the content block */}
+                    <div className="flex gap-6 mt-12 opacity-60 md:hidden">
                         <a href="https://www.linkedin.com/in/azizmughal/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin size={24} /></a>
                         <a href="#" className="hover:text-white transition-colors"><Github size={24} /></a>
                         <a href="#" className="hover:text-white transition-colors"><Twitter size={24} /></a>
@@ -102,15 +106,16 @@ const Hero: React.FC = () => {
                 </motion.div>
             </motion.div>
 
-            {/* Right Column: Profile Image */}
+            {/* Right Column: Profile Image - Order changed for mobile-first stacking */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 style={{ x: useTransform(xSpring, [-0.5, 0.5], [15, -15]), y: useTransform(ySpring, [-0.5, 0.5], [15, -15]) }}
-                className="order-2 flex justify-center md:justify-end"
+                className="order-1 md:order-2 flex justify-center md:justify-end py-10" // Added vertical padding
             >
-                <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                {/* Reduced Image size for desktop: w-96/h-96 -> w-80/h-80 */}
+                <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
                     {/* Glassmorphic Container */}
                     <div className="absolute inset-0 bg-white/5 border border-white/10 rounded-[2rem] backdrop-blur-sm transform rotate-3"></div>
                     <div className="absolute inset-0 bg-surface border border-white/5 rounded-[2rem] overflow-hidden transform -rotate-2 shadow-2xl">
