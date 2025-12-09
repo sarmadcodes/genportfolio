@@ -1,10 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize Gemini Client
-// Note: This relies on the API_KEY being present.
-const apiKey = process.env.API_KEY || ''; 
+const apiKey = process.env.GEMINI_API_KEY || ''; 
 
-// We'll only instantiate if the key exists to prevent immediate crashes in empty envs
+
 let ai: GoogleGenAI | null = null;
 if (apiKey) {
     ai = new GoogleGenAI({ apiKey });
