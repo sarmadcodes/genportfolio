@@ -45,7 +45,8 @@ const App: React.FC = () => {
 
       <ChatWidget />
       
-      <footer className="relative z-10 py-12 text-center text-secondary border-t border-white/5 bg-background">
+      {/* Reduced py-12 to py-10 for a slightly smaller feel */}
+      <footer className="relative z-10 py-10 text-center text-secondary border-t border-white/5 bg-background">
         <div className="flex justify-center gap-6 mb-6">
             <a href="https://www.linkedin.com/in/azizmughal/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white hover:text-black transition-all duration-300">
                 <Linkedin size={20} />
