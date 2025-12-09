@@ -41,17 +41,19 @@ const ventures: Venture[] = [
 
 const Ventures: React.FC = () => {
   return (
-    <div className="py-24 bg-surface/30">
-      <div className="max-w-7xl mx-auto px-4">
+    // Reduced vertical padding (py-24 -> py-20)
+    <div className="py-16 md:py-20 bg-surface/30">
+      {/* Reduced max-w-7xl to max-w-6xl for tighter desktop view */}
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 md:flex justify-between items-end"
+          className="mb-12 md:mb-14 md:flex justify-between items-end"
         >
           <div>
             <h2 className="text-sm font-semibold text-accent uppercase tracking-widest mb-4">Ventures</h2>
-            <h3 className="text-4xl font-bold">Featured Work</h3>
+            <h3 className="text-3xl md:text-4xl font-bold">Featured Work</h3>
           </div>
           <button className="hidden md:flex items-center gap-2 text-secondary hover:text-white transition-colors mt-4 md:mt-0 group">
             <a href="https://deskworksol.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
@@ -60,8 +62,8 @@ const Ventures: React.FC = () => {
           </button>
         </motion.div>
 
-        {/* --- MODIFIED GRID CLASS HERE --- */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid remains responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {ventures.map((venture, index) => (
             <motion.div
               key={venture.id}
@@ -78,11 +80,11 @@ const Ventures: React.FC = () => {
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
                 />
               </div>
-              <div className="p-8">
+              <div className="p-6 md:p-8">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h4 className="text-2xl font-bold text-white mb-1">{venture.name}</h4>
-                    <p className="text-sm text-accent font-medium">{venture.role}</p>
+                    <h4 className="text-xl md:text-2xl font-bold text-white mb-1">{venture.name}</h4>
+                    <p className="text-xs md:text-sm text-accent font-medium">{venture.role}</p>
                   </div>
                   {venture.link && (
                       <a href={venture.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full text-white/50 group-hover:text-white group-hover:bg-white/10 transition-colors">
@@ -90,7 +92,7 @@ const Ventures: React.FC = () => {
                       </a>
                   )}
                 </div>
-                <p className="text-secondary mb-6 line-clamp-2">{venture.description}</p>
+                <p className="text-sm text-secondary mb-6 line-clamp-2">{venture.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {venture.tags.map(tag => (
                     <span key={tag} className="text-xs font-medium px-3 py-1 bg-white/5 rounded-full text-secondary">
