@@ -4,7 +4,7 @@ import { Lightbulb, Target, Users, Zap } from 'lucide-react';
 
 const principles = [
   {
-    title: 'First Principles Thinking',
+    title: 'First Principles ',
     description: 'Deconstruct problems to their fundamental truths and build up from there, avoiding the trap of analogy.',
     icon: <Lightbulb size={24} />
   },
@@ -19,8 +19,8 @@ const principles = [
     icon: <Users size={24} />
   },
   {
-    title: 'Velocity over Speed',
-    description: 'Speed is distance over time. Velocity is speed with direction. We move fast, but with purpose.',
+    title: 'Concise Metaphor',
+    description: 'Speed is the gas pedal. Velocity is the steering wheel. We dont just push the pedal we steer toward a fixed goal.',
     icon: <Zap size={24} />
   }
 ];
