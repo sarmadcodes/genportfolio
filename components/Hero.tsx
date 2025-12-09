@@ -35,8 +35,8 @@ const Hero: React.FC = () => {
   return (
     <div 
       ref={ref} 
-      // UPDATED: items-start and pt-16 md:pt-32 to move content higher and align to top
-      className="relative min-h-screen flex items-start pt-16 md:pt-32 overflow-hidden"
+     
+      className="relative min-h-screen flex items-start pt-28 md:pt-32 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
         {/* Background Grid & Ambience with Parallax */}
