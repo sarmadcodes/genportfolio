@@ -34,7 +34,9 @@ const ChatWidget: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const responseText = await generateResponse(userMsg);
+            // Note: If deployed on Vercel with API routes, you need to replace
+            // generateResponse(userMsg) with a fetch to your secure /api/chat endpoint.
+            const responseText = await generateResponse(userMsg); 
             setMessages(prev => [...prev, { role: 'assistant', text: responseText }]);
         } catch (error) {
             setMessages(prev => [...prev, { role: 'assistant', text: "Sorry, I encountered an error." }]);
@@ -55,7 +57,8 @@ const ChatWidget: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.8, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                        className="mb-4 w-80 md:w-96 bg-surface/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]"
+                        // Adjusted width to be slightly smaller on mobile, with glassmorphic style
+                        className="mb-4 w-72 sm:w-80 md:w-96 bg-surface/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[450px] sm:h-[500px]"
                     >
                         {/* Chat Header */}
                         <div className="p-4 bg-white/5 border-b border-white/5 flex justify-between items-center">
@@ -129,7 +132,7 @@ const ChatWidget: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-4 bg-white text-black rounded-full shadow-lg hover:bg-gray-200 transition-colors group shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                className="p-3 md:p-4 bg-white text-black rounded-full shadow-lg hover:bg-gray-200 transition-colors group shadow-[0_0_20px_rgba(255,255,255,0.2)]"
             >
                 {isOpen ? <X size={24} /> : <MessageSquare size={24} className="group-hover:animate-pulse" />}
             </motion.button>
