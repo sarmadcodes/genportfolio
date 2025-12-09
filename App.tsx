@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import ChatWidget from './components/ChatWidget';
 import { Linkedin, Github, Twitter } from 'lucide-react';
 
+
 const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-background text-primary selection:bg-accent selection:text-white overflow-x-hidden">
@@ -51,12 +52,7 @@ const App: React.FC = () => {
             <a href="https://www.linkedin.com/in/azizmughal/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/5 hover:bg-white hover:text-black transition-all duration-300">
                 <Linkedin size={20} />
             </a>
-            <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-white hover:text-black transition-all duration-300">
-                <Github size={20} />
-            </a>
-            <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-white hover:text-black transition-all duration-300">
-                <Twitter size={20} />
-            </a>
+           
         </div>
         <p className="text-sm">&copy; {new Date().getFullYear()} Aziz Mughal. All rights reserved.</p>
       </footer>
