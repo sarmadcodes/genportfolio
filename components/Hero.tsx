@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
                         </span>
                     </div>
                     
-                    {/* MODIFIED: Changed headline structure to render on one line */}
+                    {/* Headline: Aziz Mughal. on one line */}
                     <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-6 md:mb-7 tracking-tight leading-tight">
                         <span className="text-white">Aziz</span>
                         <span className="text-secondary/60"> Mughal.</span>
@@ -95,13 +95,15 @@ const Hero: React.FC = () => {
                         >
                             Visit DWS <ExternalLink size={18} />
                         </a>
-                    </div>
-
-                    {/* Social links added to the bottom of the content block */}
-                    <div className="flex gap-6 mt-12 opacity-60 md:hidden">
-                        <a href="https://www.linkedin.com/in/azizmughal/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin size={24} /></a>
-                        <a href="#" className="hover:text-white transition-colors"><Github size={24} /></a>
-                        <a href="#" className="hover:text-white transition-colors"><Twitter size={24} /></a>
+                        {/* LinkedIn Icon Button */}
+                        <a 
+                            href="https://www.linkedin.com/in/azizmughal/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="px-4 py-3 md:px-4 md:py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors flex items-center gap-2 backdrop-blur-sm text-sm md:text-base"
+                        >
+                            <Linkedin size={18} />
+                        </a>
                     </div>
                 </motion.div>
             </motion.div>
@@ -142,14 +144,7 @@ const Hero: React.FC = () => {
             </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-            style={{ opacity }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-secondary flex flex-col items-center gap-2"
-        >
-            <span className="text-xs uppercase tracking-widest opacity-50">Scroll</span>
-            <ArrowDown size={16} className="animate-bounce" />
-        </motion.div>
+        
     </div>
   );
 };
