@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Venture } from '../types';
+
+// Custom hook to check if the screen is mobile (less than 'md' breakpoint, 768px)
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check initial size
+    const checkIsMobile = () => {
+      // Tailwind CSS 'md' breakpoint is 768px
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile(); // Run on mount
+
+    // Add listener for window resize
+    window.addEventListener('resize', checkIsMobile);
+
+    // Clean up listener on unmount
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  return isMobile;
+};
 
 const ventures: Venture[] = [
   {
@@ -39,11 +62,25 @@ const ventures: Venture[] = [
   }
 ];
 
+// Use motion.img for the image to enable Framer Motion animations
+const MotionImage = motion.img; 
+
 const Ventures: React.FC = () => {
+  const isMobile = useIsMobile();
+  
+  // Mobile transition for 1-second reveal (0.3s delay + 0.7s duration)
+  const mobileTransition = { 
+    duration: 0.7, 
+    delay: 0.3 
+  };
+  
+  // Instant transition for desktop hover
+  const desktopTransition = { 
+    duration: 0.0,
+  };
+
   return (
-    // Reduced vertical padding (py-24 -> py-20)
     <div className="py-16 md:py-20 bg-surface/30">
-      {/* Reduced max-w-7xl to max-w-6xl for tighter desktop view */}
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,7 +99,6 @@ const Ventures: React.FC = () => {
           </button>
         </motion.div>
 
-        {/* Grid remains responsive */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {ventures.map((venture, index) => (
             <motion.div
@@ -71,14 +107,31 @@ const Ventures: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="group relative bg-background border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              // ❌ REMOVED: hover:-translate-y-2 (This caused the shaking on desktop scroll)
+              // ❌ REMOVED: hover:shadow-2xl (Keeping border smooth)
+              // The card now only uses hover:border-white/20 and a smooth transition.
+              className="group relative bg-background border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300"
             >
-              <div className="aspect-video overflow-hidden">
-                <img 
+              <div className="aspect-video overflow-hidden relative">
+                <MotionImage 
                   src={venture.image} 
                   alt={venture.name} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 filter grayscale group-hover:grayscale-0"
+                  
+                  // Mobile Scroll Logic
+                  initial={{ filter: 'grayscale(100%)' }} 
+                  whileInView={{ filter: 'grayscale(0%)' }}
+                  transition={isMobile ? mobileTransition : desktopTransition}
+                  
+                  // Tailwind classes for desktop hover and scale effect (unchanged)
+                  className="w-full h-full object-cover transform 
+                             group-hover:scale-110 
+                             transition-transform duration-700
+                             md:filter md:grayscale md:group-hover:grayscale-0"
                 />
+                
+                {/* DESKTOP ONLY GRADIENT OVERLAY (Black Fade-Out) */}
+                <div className="absolute inset-0 md:block hidden bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
               </div>
               <div className="p-6 md:p-8">
                 <div className="flex justify-between items-start mb-4">
@@ -87,9 +140,9 @@ const Ventures: React.FC = () => {
                     <p className="text-xs md:text-sm text-accent font-medium">{venture.role}</p>
                   </div>
                   {venture.link && (
-                      <a href={venture.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full text-white/50 group-hover:text-white group-hover:bg-white/10 transition-colors">
-                        <ExternalLink size={20} />
-                      </a>
+                    <a href={venture.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full text-white/50 group-hover:text-white group-hover:bg-white/10 transition-colors">
+                      <ExternalLink size={20} />
+                    </a>
                   )}
                 </div>
                 <p className="text-sm text-secondary mb-6 line-clamp-2">{venture.description}</p>
@@ -106,9 +159,9 @@ const Ventures: React.FC = () => {
         </div>
         
         <div className="mt-8 md:hidden text-center">
-             <a href="https://deskworksol.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full gap-2 text-white border border-white/10 py-4 rounded-xl">
-                Visit DWS Website <ArrowRight size={16} />
-            </a>
+          <a href="https://deskworksol.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full gap-2 text-white border border-white/10 py-4 rounded-xl">
+            Visit DWS Website <ArrowRight size={16} />
+          </a>
         </div>
       </div>
     </div>
