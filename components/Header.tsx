@@ -97,7 +97,7 @@ const Header: React.FC = () => {
       {/* Mobile Header Toggle (Updated) */}
       <div className="fixed top-6 left-0 right-0 z-50 md:hidden px-6">
         <div className="flex justify-between items-center w-full">
-            {/* Mobile Badge */}
+            {/* Mobile Badge (The style source) */}
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -111,10 +111,11 @@ const Header: React.FC = () => {
                 </div>
             </motion.div>
             
-            {/* Hamburger Button (Moved to top-right) */}
+            {/* Hamburger Button: Class updated to match badge style */}
             <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-4 bg-black/50 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl text-white"
+                // Replaced bg-black/50 and backdrop-blur-xl with bg-white/5 and backdrop-blur-sm
+                className="p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white" 
             >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
