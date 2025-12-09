@@ -34,8 +34,10 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="py-24 px-4 bg-gradient-to-b from-transparent to-black/80 relative">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24">
+    // Reduced vertical padding (py-24 -> py-20)
+    <div className="py-16 md:py-20 px-4 bg-gradient-to-b from-transparent to-black/80 relative">
+      {/* Reduced max-w-6xl to max-w-5xl and reduced desktop gap */}
+      <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16">
         
         {/* Left Column: Context */}
         <motion.div
@@ -50,22 +52,23 @@ const Contact: React.FC = () => {
             <span className="text-xs font-semibold text-accent uppercase tracking-widest">Open for opportunities</span>
           </div>
           
-          <h3 className="text-4xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
+          {/* Reduced H3 size for desktop (6xl -> 5xl) */}
+          <h3 className="text-4xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">
             Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">scale?</span>
           </h3>
           
-          <p className="text-xl text-secondary mb-10 leading-relaxed max-w-lg">
+          <p className="text-base md:text-lg text-secondary mb-8 leading-relaxed max-w-lg"> {/* Reduced mb-10 to mb-8 */}
             My calendar is open for high-impact discussions. Whether you're seeking seed capital or strategic guidance, let's make every second count.
           </p>
           
-          <div className="space-y-6 mb-12">
+          <div className="space-y-5 mb-8"> {/* Reduced space-y and mb */}
             <div className="flex items-start gap-4 text-secondary group">
                 <div className="p-3 bg-white/5 rounded-xl text-white group-hover:bg-accent group-hover:text-white transition-colors">
                     <Mail size={20} />
                 </div>
                 <div>
                     <span className="block text-xs uppercase tracking-wider opacity-50 mb-1">Direct Email</span>
-                    <a href="mailto:hello@alexsterling.com" className="text-white text-lg font-medium hover:underline">hello@alexsterling.com</a>
+                    <a href="mailto:hello@azizmughal.com" className="text-white text-base md:text-lg font-medium hover:underline">hello@azizmughal.com</a>
                 </div>
             </div>
             
@@ -75,7 +78,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                     <span className="block text-xs uppercase tracking-wider opacity-50 mb-1">Response Time</span>
-                    <span className="text-white text-lg font-medium">Within 24 Hours</span>
+                    <span className="text-white text-base md:text-lg font-medium">Within 24 Hours</span>
                 </div>
             </div>
 
@@ -85,7 +88,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                     <span className="block text-xs uppercase tracking-wider opacity-50 mb-1">Base</span>
-                    <span className="text-white text-lg font-medium">San Francisco / New York</span>
+                    <span className="text-white text-base md:text-lg font-medium">Houston / Texas/USA</span>
                 </div>
             </div>
           </div>
@@ -101,7 +104,7 @@ const Contact: React.FC = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-full bg-surface text-secondary hover:text-white hover:bg-white/10 transition-all hover:-translate-y-1 border border-white/5"
+                className="p-3 md:p-4 rounded-full bg-surface text-secondary hover:text-white hover:bg-white/10 transition-all hover:-translate-y-1 border border-white/5"
               >
                 {social.icon}
               </a>
@@ -110,23 +113,24 @@ const Contact: React.FC = () => {
         </motion.div>
 
         {/* Right Column: Form */}
+        {/* Adjusted padding for a slightly smaller look p-10 -> p-8 */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-[#121214] border border-white/10 rounded-[2rem] p-6 md:p-10 shadow-2xl relative overflow-hidden"
+          className="bg-[#121214] border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
           
           <div className="relative z-10">
             {isSuccess ? (
-                <div className="h-full flex flex-col items-center justify-center text-center py-20 space-y-6">
-                    <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
-                        <CheckCircle size={40} />
+                <div className="h-full flex flex-col items-center justify-center text-center py-12 md:py-20 space-y-6">
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500">
+                        <CheckCircle size={30} md:size={40} />
                     </div>
                     <div>
-                        <h4 className="text-3xl font-bold mb-2">Request Sent!</h4>
+                        <h4 className="text-2xl md:text-3xl font-bold mb-2">Request Sent!</h4>
                         <p className="text-secondary max-w-xs mx-auto">Thank you for reaching out. I'll review your inquiry and get back to you shortly.</p>
                     </div>
                     <button 
@@ -139,22 +143,22 @@ const Contact: React.FC = () => {
             ) : (
                 <>
                     <div className="mb-8">
-                        <h4 className="text-2xl font-bold mb-2">Schedule a Meeting</h4>
-                        <p className="text-secondary">Please provide details about your inquiry.</p>
+                        <h4 className="text-xl md:text-2xl font-bold mb-2">Schedule a Meeting</h4>
+                        <p className="text-secondary text-sm">Please provide details about your inquiry.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <input type="hidden" name="subject" value="New Portfolio Inquiry" />
                         <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div className="space-y-2">
                                 <label className="text-xs uppercase tracking-wider text-secondary font-semibold ml-1">First Name</label>
                                 <input 
                                     type="text" 
                                     name="name"
                                     placeholder="Type here..."
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
                                     required
                                 />
                             </div>
@@ -164,7 +168,7 @@ const Contact: React.FC = () => {
                                     type="text" 
                                     name="last_name"
                                     placeholder="Type here..."
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
                                     required
                                 />
                             </div>
@@ -176,7 +180,7 @@ const Contact: React.FC = () => {
                                 type="email" 
                                 name="email"
                                 placeholder="john@company.com"
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all"
                                 required
                             />
                         </div>
@@ -184,7 +188,7 @@ const Contact: React.FC = () => {
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-wider text-secondary font-semibold ml-1">Topic</label>
                             <div className="relative">
-                                <select name="topic" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-accent focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                                <select name="topic" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent focus:bg-white/10 transition-all appearance-none cursor-pointer">
                                     <option value="investment" className="bg-[#121214] text-white">Investment Proposal</option>
                                     <option value="speaking" className="bg-[#121214] text-white">Speaking Engagement</option>
                                     <option value="advisory" className="bg-[#121214] text-white">Advisory Role</option>
@@ -202,15 +206,16 @@ const Contact: React.FC = () => {
                                 name="message"
                                 rows={4}
                                 placeholder="How can we work together?"
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-accent focus:bg-white/10 transition-all resize-none"
                                 required
                             ></textarea>
                         </div>
 
+                        {/* Reduced py-4 to py-3.5 and text-lg to text-base for a smaller button */}
                         <button 
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-white hover:bg-gray-200 text-black font-bold text-lg rounded-xl py-4 mt-2 transition-all active:scale-[0.99] flex items-center justify-center gap-2 group shadow-lg shadow-white/5 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full bg-white hover:bg-gray-200 text-black font-bold text-base rounded-xl py-3.5 mt-2 transition-all active:scale-[0.99] flex items-center justify-center gap-2 group shadow-lg shadow-white/5 disabled:opacity-70 disabled:cursor-not-allowed" 
                         >
                             {isSubmitting ? (
                                 <>Processing <Loader2 size={18} className="animate-spin" /></>
