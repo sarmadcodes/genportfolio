@@ -29,7 +29,7 @@ const About: React.FC = () => {
           
           <div className="mt-8 flex gap-8">
             <div>
-              <span className="block text-2xl md:text-3xl font-bold text-white">50+</span>
+              <span className="block text-2xl md:text-3xl font-bold text-white">250+</span>
               <span className="text-xs md:text-sm text-secondary">Projects Delivered</span>
             </div>
             <div>
